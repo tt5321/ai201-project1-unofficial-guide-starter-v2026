@@ -26,6 +26,8 @@ contains the answer.
 <!-- e.g. "One of my questions is about a topic only two documents mention, so
      I expect that one to be hard." -->
 
+One of my questions starts with “Should students...?”, so the system may answer “no” without providing the expected answer.
+
 ---
 
 ## 2. Every answer names a source
@@ -35,6 +37,8 @@ Every answer the system produces names at least one source document.
 **Why this target:**
 <!-- Why all five and not four? What about your setup makes that achievable —
      or what would have to go wrong for it not to be? -->
+
+The prompt requires the model to name the source when providing an answer, so every answer should have a source.
 
 ---
 
@@ -53,9 +57,13 @@ in at least 4 of 5 tries.
 <!-- What did your distances look like when you set the cutoff in Milestone 4?
      Was there a clean gap, or did the two groups overlap? -->
 
+The current cutoff is 0.6, so there is a possibility that an unrelated question may have a distance close to 0.6. Therefore, I expect the relevance gate to reject at least 4 out of 5 tries. 
+
 ---
 
 ## 4. Something about your chunks
+
+5 of 5 sampled chunks can be understood without referring to neighboring chunks, with none of them cutting off a sentence.
 
 <!-- YOU WRITE THIS ONE.
 
@@ -73,11 +81,13 @@ in at least 4 of 5 tries.
 
 **Why this target:**
 
-
+The "campus_life" corpus consists of short texts of 1-3 paragraphs, so I expect all the sampled chunks to be easy to follow and not cut off sentences.
 
 ---
 
 ## 5. Your choice
+
+For all 5 test questions, every factual claim in the answer is supported by the cited source document(s).
 
 <!-- YOU WRITE THIS ONE TOO.
 
@@ -91,6 +101,7 @@ in at least 4 of 5 tries.
 
 **Why this target:**
 
+The prompt requires the model to use only information from the provided documents and not guess, so I expect all factual claims in the 5 answers to be supported by the documents.
 
 
 ---
