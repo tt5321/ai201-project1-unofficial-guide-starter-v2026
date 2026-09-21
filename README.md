@@ -2,19 +2,20 @@
 
 Tiantian Ma - "campus_life"
 
-> **This file is your submission.** Fill it in as you go — most sections get
-> written during the milestone that produces them, not at the end.
->
-> How the starter works, and every command you'll need, is in `RUNNING.md`.
-> Leave that file alone.
->
-> **Paste everything as text.** No screenshots, no video. A typed table gets
-> full credit; a picture of the same table gets none, because the grader can't
-> read it.
->
-> Delete these instruction blocks as you replace them. The `<!-- -->` comments
-> are notes to you and don't show up when the page renders — you can leave them
-> or remove them.
+<!--
+ **This file is your submission.** Fill it in as you go — most sections get
+ written during the milestone that produces them, not at the end.
+
+ How the starter works, and every command you'll need, is in `RUNNING.md`.
+ Leave that file alone.
+
+ **Paste everything as text.** No screenshots, no video. A typed table gets
+ full credit; a picture of the same table gets none, because the grader can't
+ read it.
+
+ Delete these instruction blocks as you replace them. The `&lt;!-- --&gt;` comments
+ are notes to you and don't show up when the page renders — you can leave them
+ or remove them.-->
 
 ---
 
@@ -27,6 +28,7 @@ Tiantian Ma - "campus_life"
      this repo.
 
      Milestone 5. -->
+This system is a RAG system capable of answering questions based on a specified set of documents. I chose the "campus_life" corpus, which is a set of short posts about student life at a university. Therefore, the system can answer questions related to university student life, such as parking, course drop policies, and residence halls. If the answer to a question cannot be found in the corpus, the system replies that it does not have enough information. Otherwise, it provides an answer with the supporting document(s) and a relevance score shown behind the scenes.
 
 ## Chunking Strategy
 
@@ -43,11 +45,10 @@ Tiantian Ma - "campus_life"
 
      Milestone 3. -->
 
-Most of the documents in the “campus_life” corpus are self-contained and focus on a single topic. Although some are follow-ups to another document, they are a minority and can stand on their own without the original document. Therefore, I chose an overlap of 0.
-
+Most of the documents in the “campus_life” corpus are self-contained and focus on a single topic. Although some are follow-ups to another document, they are a minority and can stand on their own without the original document. Therefore, I chose an overlap of 0 for this corpus.
 The shortest document is 178 characters, and the longest is 549 characters. I chose a chunk size of 600 so that the entire document can be kept as one chunk, preserving its topic and context.
 
-The chunking strategy is to use the entire document as a single chunk. If a document is longer than 600 characters, it is split into chunks of 600 characters by calling the `fallback_split` function.
+The chunking strategy is to use the entire document as a single chunk. If a document is longer than 600 characters, it is split into chunks of 600 characters by calling the `fallback_split` function with an overlap of 120.
 
 ## Sample Chunks
 
@@ -176,8 +177,10 @@ The best distances for my in-scope questions range from 0.213 to 0.573, while th
      Milestone 5. -->
 
 **1.**
+I asked Claude to pressure-test the criteria I wrote. It pointed out that the wording of the last criterion might be interpreted differently by different people, so I revised it to make the wording clearer.
 
 **2.**
+I asked Claude to write the chunking function based on my notes. It provided two versions: one without a fallback and the other with a fallback. I chose the version with a fallback, reviewed it, and modified a variable name.
 
 <!-- ── Stretch features ─────────────────────────────────────────────────────
      Doing one? Say so here BEFORE you start. A feature this README never
