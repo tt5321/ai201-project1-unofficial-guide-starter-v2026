@@ -30,8 +30,8 @@ Tiantian Ma - "campus_life"
 
 ## Chunking Strategy
 
-**Chunk size:**
-**Overlap:**
+**Chunk size: 600**
+**Overlap: 0**
 
 <!-- What about YOUR documents made you pick these numbers? Short posts and
      long sectioned guides don't want the same chunking, and "800 seemed
@@ -42,6 +42,12 @@ Tiantian Ma - "campus_life"
      more than pretending you got it right first time.
 
      Milestone 3. -->
+
+Most of the documents in the “campus_life” corpus are self-contained and focus on a single topic. Although some are follow-ups to another document, they are a minority and can stand on their own without the original document. Therefore, I chose an overlap of 0.
+
+The shortest document is 178 characters, and the longest is 549 characters. I chose a chunk size of 600 so that the entire document can be kept as one chunk, preserving its topic and context.
+
+The chunking strategy is to use the entire document as a single chunk. If a document is longer than 600 characters, it is split into chunks of 600 characters by calling the `fallback_split` function.
 
 ## Sample Chunks
 
@@ -114,13 +120,25 @@ Laundry costs $1.75 wash, $1.75 dry, app-based. On noise: moderate; the building
      visible. Milestone 4. -->
 
 **Question:**
+For courses with light reading loads, how can a student access the required textbooks without cost?
 
 **Answer:**
 
 ```
+  (best distance 0.213, cutoff 0.65)
+
+A student can access the required textbooks without cost because the library holds one copy of most required texts on a two-hour reserve, which is genuinely all that is needed for reading-light courses. 
+
+(Source: money_textbooks.txt)
+
+Sources retrieved: admin_printing_quota.txt, money_textbooks.txt, study_group_rooms.txt
+
+1 model calls this session, 431 tokens (380 in, 51 out)
 ```
 
-**My relevance cutoff:**
+**My relevance cutoff: 0.65**
+
+The best distances for my in-scope questions range from 0.213 to 0.573, while the best distances for the out-of-scope questions range from 0.825 to 0.934. Since one of the in-scope questions has a best distance of 0.573, which is very close to the original cutoff of 0.6, I prefer a cutoff of 0.65.
 
 <!-- The number you set in config.py, and how you got there.
 
@@ -133,7 +151,18 @@ Laundry costs $1.75 wash, $1.75 dry, app-based. On noise: moderate; the building
 
 | Question | In corpus? | Best distance |
 |---|---|---|
-|  |  |  |
+| "Should a student contact the department directly if they want to raise a grade appeal?" | Yes | 0.339 |
+| "Is there a place to park if a student missed the permit request timeline?", "expects" | Yes | 0.573 |
+| "What do students say about the noise level at Aldridge Hall?", "expects" | Yes | 0.309 |
+| "For courses with light reading loads, how can a student access the required textbooks without cost?" | Yes | 0.213 |
+| "What do students say about the location of Pellew Dining Hall?" | Yes | 0.362 |
+| "What is the capital of Mongolia?" | No | 0.825 |
+| "How do I change the oil in a diesel engine?" | No | 0.934 |
+| "Who won the 1994 World Cup?" | No | 0.886 |
+| "What is the recommended dosage of ibuprofen for a headache?" | No | 0.844 |
+| "How do I write a for loop in Rust?" | No | 0.896 |
+
+
 
 ## How I Used AI
 
